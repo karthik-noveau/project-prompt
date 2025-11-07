@@ -1,1 +1,1 @@
-### ✅ **AI Code generation prompt**
+# AI Code generation prompt
