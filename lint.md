@@ -1,31 +1,65 @@
-## 🧭 5. Import Order Standard
+**Alias setup** for a Vite + React project:
 
-Maintain this **strict import order**:
+✅ `@pages`
+✅ `@common`
+✅ `@theme`
+✅ `@assets`
+
+---
+
+# ✅ 1. **Vite Alias Setup**
+
+### `vite.config.js`
 
 ```js
-// 1️⃣ React and core libraries
-import React from "react";
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+import path from "path";
 
-// 2️⃣ Third-party packages
-import { motion } from "framer-motion";
-
-// 3️⃣ Aliased/shared imports
-import { useExampleHook } from "@common/hooks";
-import { Button } from "@components/button";
-import Banner from "@assets/home/top-banner.png";
-
-// 4️⃣ Local imports (specific to this component)
-import { processImage } from "./utils";
-
-// 5️⃣ Styles (always last)
-import styles from "./style.module.css";
+export default defineConfig({
+  plugins: [react()],
+  resolve: {
+    alias: {
+      "@pages": path.resolve(__dirname, "src/pages"),
+      "@common": path.resolve(__dirname, "src/common"),
+      "@theme": path.resolve(__dirname, "src/theme"),
+      "@assets": path.resolve(__dirname, "src/assets")
+    }
+  }
+});
 ```
 
 ---
 
-## ⚙️ 6. ESLint + Prettier + VSCode Setup
+# ✅ 2. **JS Config (VSCode autocompletion)**
 
-These settings ensure **auto-format and import order enforcement on save.**
+### `jsconfig.json`
+
+```json
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "@pages/*": ["src/pages/*"],
+      "@common/*": ["src/common/*"],
+      "@theme/*": ["src/theme/*"],
+      "@assets/*": ["src/assets/*"]
+    }
+  },
+  "include": ["src"]
+}
+```
+
+---
+
+# ✅ 3. **ESLint Import Order**
+
+✅ React
+✅ Third-party libs
+✅ Aliased imports (`@pages`, `@common`, `@theme`, `@assets`)
+✅ Local imports
+✅ Styles
+✅ Assets (placed after styles)
 
 ### `.eslintrc.json`
 
@@ -41,23 +75,22 @@ These settings ensure **auto-format and import order enforcement on save.**
   "plugins": ["react", "import"],
   "rules": {
     "react/react-in-jsx-scope": "off",
+
     "import/order": [
       "error",
       {
-        "groups": [["builtin", "external"], ["internal"], ["parent", "sibling", "index"]],
+        "groups": [
+          ["builtin", "external"],
+          ["internal"],
+          ["parent", "sibling", "index"],
+          ["unknown"],
+          ["type"]
+        ],
         "pathGroups": [
-          {
-            "pattern": "@common/**",
-            "group": "internal",
-            "position": "before"
-          },
-          {
-            "pattern": "@components/**",
-            "group": "internal",
-            "position": "before"
-          },
           { "pattern": "@pages/**", "group": "internal", "position": "before" },
-          { "pattern": "@assets/**", "group": "internal", "position": "before" }
+          { "pattern": "@common/**", "group": "internal", "position": "before" },
+          { "pattern": "@theme/**", "group": "internal", "position": "before" },
+          { "pattern": "@assets/**", "group": "internal", "position": "after" }
         ],
         "newlines-between": "always",
         "alphabetize": { "order": "asc", "caseInsensitive": true }
@@ -68,38 +101,47 @@ These settings ensure **auto-format and import order enforcement on save.**
     "import/resolver": {
       "alias": {
         "map": [
-          ["@common", "./src/common"],
-          ["@components", "./src/components"],
           ["@pages", "./src/pages"],
+          ["@common", "./src/common"],
+          ["@theme", "./src/theme"],
           ["@assets", "./src/assets"]
         ],
-        "extensions": [".js", ".jsx"]
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
       }
     }
   }
 }
 ```
 
-### `.prettierrc`
+✅ **Ensures assets come last**
+✅ **Matches your exact alias list**
+✅ **Auto-fixes on save**
 
-```json
-{
-  "singleQuote": false,
-  "trailingComma": "es5",
-  "semi": true,
-  "printWidth": 100,
-  "tabWidth": 2,
-  "arrowParens": "always"
-}
-```
+---
 
-### `.vscode/settings.json`
+# ✅ 4. **Import Example Matching Your New Structure**
 
-```json
-{
-  "editor.formatOnSave": true,
-  "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true
-  }
-}
+✅ **Final sorted imports exactly as ESLint will enforce:**
+
+```js
+// 1️⃣ React & Core
+import React from "react";
+
+// 2️⃣ Third-party
+import { Modal, Slider, Tag, Progress } from "antd";
+
+// 3️⃣ Aliased imports
+import { useGetProcessedImage } from "@common/hooks";
+import { formatDate } from "@common/utils";
+import { Button } from "@common/components";
+import { TYPES } from "@common/constants";
+
+// 4️⃣ Local component-specific imports
+import { processImage } from "./utils";
+
+// 5️⃣ Styles
+import styles from "./style.module.css";
+
+// 6️⃣ Assets (after styles)
+import Banner from "@assets/home/banner.png";
 ```
