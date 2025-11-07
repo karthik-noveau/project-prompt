@@ -1,5 +1,5 @@
 # 📦 AI code generation Prompt's
 
-** Codebase Overview **
+Codebase Overview
 
-** Project Details **
+Project Details
