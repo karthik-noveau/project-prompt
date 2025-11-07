@@ -1,147 +1,138 @@
-**Alias setup** for a Vite + React project:
+**ESLint + Vite + React + Aliases setup 👇**
 
-✅ `@pages`
-✅ `@common`
-✅ `@theme`
-✅ `@assets`
-
----
-
-# ✅ 1. **Vite Alias Setup**
-
-### `vite.config.js`
+### ✅ **`vite.config.js`**
 
 ```js
-import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
-import path from "path";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+import { defineConfig } from "vite";
 
+const pathURL = path.dirname(fileURLToPath(import.meta.url));
+
+// https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
+  optimizeDeps: {
+    exclude: ["@imgly/background-removal"],
+  },
+  server: {
+    headers: {
+      "Cross-Origin-Opener-Policy": "same-origin",
+      "Cross-Origin-Embedder-Policy": "require-corp",
+    },
+  },
   resolve: {
     alias: {
-      "@pages": path.resolve(__dirname, "src/pages"),
-      "@common": path.resolve(__dirname, "src/common"),
-      "@theme": path.resolve(__dirname, "src/theme"),
-      "@assets": path.resolve(__dirname, "src/assets")
-    }
-  }
+      "@assets": path.resolve(pathURL, "./src/assets"),
+      "@common": path.resolve(pathURL, "./src/common"),
+      "@pages": path.resolve(pathURL, "./src/pages"),
+      "@theme": path.resolve(pathURL, "./src/theme"),
+    },
+  },
 });
 ```
 
 ---
 
-# ✅ 2. **JS Config (VSCode autocompletion)**
-
-### `jsconfig.json`
+### ✅ **`.vscode/settings.json`**
 
 ```json
 {
-  "compilerOptions": {
-    "baseUrl": "./",
-    "paths": {
-      "@pages/*": ["src/pages/*"],
-      "@common/*": ["src/common/*"],
-      "@theme/*": ["src/theme/*"],
-      "@assets/*": ["src/assets/*"]
-    }
+  "eslint.useFlatConfig": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
   },
-  "include": ["src"]
+  "eslint.validate": ["javascript", "javascriptreact"],
+  "editor.formatOnSave": false
 }
 ```
 
 ---
 
-# ✅ 3. **ESLint Import Order**
-
-✅ React
-✅ Third-party libs
-✅ Aliased imports (`@pages`, `@common`, `@theme`, `@assets`)
-✅ Local imports
-✅ Styles
-✅ Assets (placed after styles)
-
-### `.eslintrc.json`
-
-```json
-{
-  "extends": [
-    "eslint:recommended",
-    "plugin:react/recommended",
-    "plugin:import/errors",
-    "plugin:import/warnings",
-    "prettier"
-  ],
-  "plugins": ["react", "import"],
-  "rules": {
-    "react/react-in-jsx-scope": "off",
-
-    "import/order": [
-      "error",
-      {
-        "groups": [
-          ["builtin", "external"],
-          ["internal"],
-          ["parent", "sibling", "index"],
-          ["unknown"],
-          ["type"]
-        ],
-        "pathGroups": [
-          { "pattern": "@pages/**", "group": "internal", "position": "before" },
-          { "pattern": "@common/**", "group": "internal", "position": "before" },
-          { "pattern": "@theme/**", "group": "internal", "position": "before" },
-          { "pattern": "@assets/**", "group": "internal", "position": "after" }
-        ],
-        "newlines-between": "always",
-        "alphabetize": { "order": "asc", "caseInsensitive": true }
-      }
-    ]
-  },
-  "settings": {
-    "import/resolver": {
-      "alias": {
-        "map": [
-          ["@pages", "./src/pages"],
-          ["@common", "./src/common"],
-          ["@theme", "./src/theme"],
-          ["@assets", "./src/assets"]
-        ],
-        "extensions": [".js", ".jsx", ".ts", ".tsx"]
-      }
-    }
-  }
-}
-```
-
-✅ **Ensures assets come last**
-✅ **Matches your exact alias list**
-✅ **Auto-fixes on save**
-
----
-
-# ✅ 4. **Import Example Matching Your New Structure**
-
-✅ **Final sorted imports exactly as ESLint will enforce:**
+### ✅ **`eslint.config.js`**
 
 ```js
-// 1️⃣ React & Core
-import React from "react";
+// ✅ ESLint 9 Flat Config — React + Vite + Hooks + Aliases
+import js from "@eslint/js";
+import react from "eslint-plugin-react";
+import reactHooks from "eslint-plugin-react-hooks";
+import importPlugin from "eslint-plugin-import";
+import globals from "globals";
+import path from "path";
 
-// 2️⃣ Third-party
-import { Modal, Slider, Tag, Progress } from "antd";
+export default [
+  js.configs.recommended,
 
-// 3️⃣ Aliased imports
-import { useGetProcessedImage } from "@common/hooks";
-import { formatDate } from "@common/utils";
-import { Button } from "@common/components";
-import { TYPES } from "@common/constants";
+  {
+    files: ["**/*.{js,jsx}"],
 
-// 4️⃣ Local component-specific imports
-import { processImage } from "./utils";
+    languageOptions: {
+      ecmaVersion: "latest",
+      sourceType: "module",
+      parserOptions: {
+        ecmaFeatures: { jsx: true },
+      },
+      globals: {
+        ...globals.browser, // ✅ window, document, Image, etc.
+        ...globals.node, // ✅ process, __dirname, etc.
+      },
+    },
 
-// 5️⃣ Styles
-import styles from "./style.module.css";
+    plugins: {
+      react,
+      "react-hooks": reactHooks,
+      import: importPlugin,
+    },
 
-// 6️⃣ Assets (after styles)
-import Banner from "@assets/home/banner.png";
+    settings: {
+      react: { version: "detect" },
+      "import/resolver": {
+        alias: {
+          map: [
+            ["@assets", path.resolve("src/assets")],
+            ["@common", path.resolve("src/common")],
+            ["@pages", path.resolve("src/pages")],
+            ["@theme", path.resolve("src/theme")],
+          ],
+          extensions: [".js", ".jsx"],
+        },
+      },
+    },
+
+    rules: {
+      // ✅ React & JSX
+      "react/react-in-jsx-scope": "off",
+      "react/jsx-uses-vars": "error",
+
+      // ✅ Hooks
+      "react-hooks/rules-of-hooks": "error",
+      "react-hooks/exhaustive-deps": "warn",
+
+      // ✅ Import order
+      "import/order": [
+        "error",
+        {
+          groups: [
+            ["builtin", "external"],
+            ["internal"],
+            ["parent", "sibling", "index"],
+          ],
+          pathGroups: [
+            { pattern: "@pages/**", group: "internal", position: "before" },
+            { pattern: "@common/**", group: "internal", position: "before" },
+            { pattern: "@theme/**", group: "internal", position: "before" },
+            { pattern: "@assets/**", group: "internal", position: "after" },
+          ],
+          pathGroupsExcludedImportTypes: ["builtin"],
+          "newlines-between": "always",
+          alphabetize: { order: "asc", caseInsensitive: true },
+        },
+      ],
+
+      // ✅ General
+      "no-unused-vars": ["warn", { argsIgnorePattern: "^_" }],
+    },
+  },
+];
 ```
