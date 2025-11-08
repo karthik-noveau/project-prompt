@@ -1,5 +1,37 @@
 **ESLint + Vite + React + Aliases setup 👇**
 
+### ✅ **`settings.json`**
+
+```js
+{
+  "eslint.useFlatConfig": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+  "eslint.validate": ["javascript", "javascriptreact"],
+  "editor.formatOnSave": true
+}
+
+```
+
+### ✅ **`jsconfig.json`**
+
+```js
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "@assets/*": ["src/assets/*"],
+      "@common/*": ["src/common/*"],
+      "@pages/*": ["src/pages/*"],
+      "@theme/*": ["src/theme/*"]
+    }
+  },
+  "include": ["src"]
+}
+
+```
+
 ### ✅ **`vite.config.js`**
 
 ```js
@@ -44,7 +76,7 @@ export default defineConfig({
     "source.fixAll.eslint": "explicit"
   },
   "eslint.validate": ["javascript", "javascriptreact"],
-  "editor.formatOnSave": false
+  "editor.formatOnSave": true
 }
 ```
 
@@ -53,85 +85,86 @@ export default defineConfig({
 ### ✅ **`eslint.config.js`**
 
 ```js
-// ✅ ESLint 9 Flat Config — React + Vite + Hooks + Aliases
 import js from "@eslint/js";
+import eslintPluginImport from "eslint-plugin-import";
 import react from "eslint-plugin-react";
 import reactHooks from "eslint-plugin-react-hooks";
-import importPlugin from "eslint-plugin-import";
+import reactRefresh from "eslint-plugin-react-refresh";
+import simpleImportSort from "eslint-plugin-simple-import-sort";
 import globals from "globals";
-import path from "path";
 
 export default [
-  js.configs.recommended,
-
+  {
+    ignores: ["dist", "node_modules", "eslint.config.js"],
+  },
   {
     files: ["**/*.{js,jsx}"],
 
     languageOptions: {
-      ecmaVersion: "latest",
-      sourceType: "module",
       parserOptions: {
+        ecmaVersion: "latest",
+        sourceType: "module",
         ecmaFeatures: { jsx: true },
       },
-      globals: {
-        ...globals.browser, // ✅ window, document, Image, etc.
-        ...globals.node, // ✅ process, __dirname, etc.
-      },
+      globals: globals.browser,
     },
 
     plugins: {
       react,
       "react-hooks": reactHooks,
-      import: importPlugin,
-    },
-
-    settings: {
-      react: { version: "detect" },
-      "import/resolver": {
-        alias: {
-          map: [
-            ["@assets", path.resolve("src/assets")],
-            ["@common", path.resolve("src/common")],
-            ["@pages", path.resolve("src/pages")],
-            ["@theme", path.resolve("src/theme")],
-          ],
-          extensions: [".js", ".jsx"],
-        },
-      },
+      "react-refresh": reactRefresh,
+      "simple-import-sort": simpleImportSort,
+      import: eslintPluginImport,
     },
 
     rules: {
-      // ✅ React & JSX
+      ...js.configs.recommended.rules,
+      ...react.configs.recommended.rules,
+      ...reactHooks.configs.recommended.rules,
+
+      // ❌ Disable prop-types rule (not needed)
+      "react/prop-types": "off",
+
+      // ✅ Turn off the old rule that expects `React` to be imported
       "react/react-in-jsx-scope": "off",
-      "react/jsx-uses-vars": "error",
 
-      // ✅ Hooks
-      "react-hooks/rules-of-hooks": "error",
-      "react-hooks/exhaustive-deps": "warn",
+      // ✅ React Refresh HMR safety
+      "react-refresh/only-export-components": [
+        "warn",
+        { allowConstantExport: true },
+      ],
 
-      // ✅ Import order
-      "import/order": [
+      // ✅ Import order — matches your expected style exactly
+      "simple-import-sort/imports": [
         "error",
         {
           groups: [
-            ["builtin", "external"],
-            ["internal"],
-            ["parent", "sibling", "index"],
+            // 1️⃣ React and core libs
+            ["^react", "^react-dom"],
+            // 2️⃣ External packages (Antd, Lucide, etc.)
+            ["^antd", "^lucide-react", "^@?\\w"],
+            // 3️⃣ Internal aliases
+            [
+              "^@assets(/.*|$)",
+              "^@common(/.*|$)",
+              "^@pages(/.*|$)",
+              "^@theme(/.*|$)",
+            ],
+            // 4️⃣ Relative imports (current project files)
+            ["^\\.{1,2}/"],
+            // 5️⃣ Side effects (e.g., CSS or global styles)
+            ["^\\u0000", "^.+\\.(css|scss)$"],
+            // 6️⃣ Assets (images, videos, etc.)
+            ["^.+\\.(png|jpe?g|gif|svg|webp|mp4|mp3|ogg|wav)$"],
           ],
-          pathGroups: [
-            { pattern: "@pages/**", group: "internal", position: "before" },
-            { pattern: "@common/**", group: "internal", position: "before" },
-            { pattern: "@theme/**", group: "internal", position: "before" },
-            { pattern: "@assets/**", group: "internal", position: "after" },
-          ],
-          pathGroupsExcludedImportTypes: ["builtin"],
-          "newlines-between": "always",
-          alphabetize: { order: "asc", caseInsensitive: true },
         },
       ],
 
-      // ✅ General
-      "no-unused-vars": ["warn", { argsIgnorePattern: "^_" }],
+      // ✅ Sort exports too
+      "simple-import-sort/exports": "error",
+
+      // ✅ Enforce newline between import groups
+      "import/newline-after-import": ["error", { count: 1 }],
     },
   },
 ];
