@@ -1,6 +1,6 @@
 **ESLint + Vite + React + Aliases setup 👇**
 
-### ✅ **`settings.json`**
+### ✅ **`vscode/settings.json`**
 
 ```js
 {
@@ -63,21 +63,6 @@ export default defineConfig({
     },
   },
 });
-```
-
----
-
-### ✅ **`.vscode/settings.json`**
-
-```json
-{
-  "eslint.useFlatConfig": true,
-  "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": "explicit"
-  },
-  "eslint.validate": ["javascript", "javascriptreact"],
-  "editor.formatOnSave": true
-}
 ```
 
 ---
