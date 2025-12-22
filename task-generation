@@ -1,54 +1,110 @@
-*Task generation*
+# 🚨 MEGA FRONTEND GENERATION PROMPT TEMPLATE
+
+### 1️⃣ Project Name & Tagline
+
+Write the project name and a one-line description.
 
 ---
 
-# ✅ SECTION 1 — PROJECT NAME
-Insert the official project name here.
-Write a short 1–2 line tagline describing what the project does.
+### 2️⃣ Project Overview
+
+Explain in 4-6 lines:
+
+* what problem it solves
+* who uses it
+* what platform (web/PWA)
+* any unique requirement (drag-drop / real-time / etc.)
 
 ---
 
-# ✅ SECTION 2 — PROJECT OVERVIEW
-Write a clear, human-friendly explanation of:
-- What the project solves
-- Who will use it
-- What makes it unique
+### 3️⃣ Tech Stack
+
+List:
+
+* Framework (React)
+* TypeScript
+* Styling (CSS modules / No Tailwind)
+* State (Zustand)
+* Testing (Jest)
 
 ---
 
-# ✅ SECTION 3 — ARCHITECTURE
-Write a detailed architecture explanation using this structure:
+### 4️⃣ Engine Split
 
-## 🧱 Tech Stack  
-List all:
-- Frontend frameworks
-- Libraries
-- State management
-- Build tools
+Divide the frontend into 4–12 **independent engines**, each with:
 
-## 🔧 System Workflow  
-Explain step-by-step how the app works internally.
-Use bullet points.
+* clear responsibility
+* isolated logic
+* their own state
+* their own tests
 
----
+Examples (pick your own):
 
-# ✅ SECTION 4 — CORE FEATURES
-List ALL FEATURES using this format:
-
-### ✅ Feature Title  
-Short explanation  
-- Bullet 1  
-- Bullet 2  
-- Bullet 3
-
-Categorize features if many:
-- User features
-- Admin features
-- Studio tools
-- Media processing
-- Performance features
+* UI Engine
+* Canvas/Editor Engine
+* Components Engine
+* Auth/UI Guard Engine
+* Undo/Redo Engine
+* Offline/Cache Engine
+* Routing Engine
 
 ---
 
-# ✅ SECTION 5 — SETUP & LOCAL RUN (MANDATORY)
-Write a clean step-by-step setup guide:
+### 5️⃣ Task Breakdown
+
+For each engine:
+
+* split into small tasks
+* each task must include:
+
+  * purpose
+  * expected behavior
+  * test cases
+
+---
+
+### 6️⃣ Code Generation Rules (short)
+
+Tell the generator:
+
+* write tests first
+* then write code to pass them
+* no TODOs / no placeholders
+* no skipped logic
+* real working React/TS code
+* responsive + accessible
+
+---
+
+### 7️⃣ Integration Rules
+
+After isolated engines are built:
+
+* integrate them
+* run integration tests
+* ensure state + routing + UI works together
+
+---
+
+### 8️⃣ Output Order
+
+The generator must output in this sequence:
+
+1. engines definition
+2. tasks
+3. test files
+4. implementation
+5. integration
+6. final build
+
+---
+
+### 📌 FINAL INSTRUCTION
+
+```
+Generate the entire frontend codebase engine-by-engine.
+Use test-driven development.
+Do not skip logic or features.
+Produce real working TypeScript + React code.
+Integrate all engines at the end.
+```
