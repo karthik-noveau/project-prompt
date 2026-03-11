@@ -9,7 +9,7 @@ EXTERNAL PR REVIEW CONFIG
       "command": "npx",
       "args": ["-y", "@modelcontextprotocol/server-github"],
       "env": {
-        "GITHUB_PERSONAL_ACCESS_TOKEN": "<REDACTED>"
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "<TOKEN>"
       }
     }
   }
