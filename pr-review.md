@@ -1,6 +1,6 @@
 ```
 ────────────────────────
-EXTERNAL PR REVIEW CONFIG
+EXTERNAL PR REVIEW CONFIG ( add in .claude/settings.json )
 ────────────────────────
 {
   "alwaysThinkingEnabled": true,
