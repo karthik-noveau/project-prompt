@@ -1,7 +1,10 @@
 ```
 ────────────────────────
-EXTERNAL PR REVIEW CONFIG ( add in .claude/settings.json )
+EXTERNAL PR REVIEW CONFIG 
 ────────────────────────
+
+add in .claude/settings.json
+
 {
   "alwaysThinkingEnabled": true,
   "mcpServers": {
