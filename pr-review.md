@@ -4,7 +4,6 @@ EXTERNAL PR REVIEW CONFIG
 ────────────────────────
 Add this to: `.claude/settings.json`
 
-```json
 {
   "alwaysThinkingEnabled": true,
   "mcpServers": {
@@ -17,7 +16,6 @@ Add this to: `.claude/settings.json`
     }
   }
 }
-```
 
 ────────────────────────
 PR REVIEW TYPE
