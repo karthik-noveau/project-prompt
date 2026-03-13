@@ -18,7 +18,7 @@ Add this to: `.claude/settings.json`
 }
 
 
-────────────────────────
+ ────────────────────────
 PR REVIEW CONFIG
 ────────────────────────
 
@@ -33,20 +33,38 @@ Select review type:
 ---
 
 If option **1 (External PR)**
-→ Ask: "Enter PR URL or PR number"
-→ Run: `gh pr diff <number|url>`
-→ Review changes against `${COMPARE_BRANCH}`
-→ Do **NOT** modify code
+
+Ask:
+Enter PR URL or PR number
+
+Run:
+`gh pr diff <number|url>`
+
+Review changes against `${COMPARE_BRANCH}`.
+Do **NOT** modify code.
+
+---
 
 If option **2 (Local changes)**
-→ Run: `git diff ${COMPARE_BRANCH}...HEAD`
-→ Review local changes only
+
+Run:
+`git diff ${COMPARE_BRANCH}...HEAD`
+
+Review local changes only.
+
+---
 
 If option **3 (Local changes + Self PR)**
-→ Ask: "Enter PR URL or PR number"
-→ Run: `gh pr diff <number|url>`
-→ Also run: `git diff ${COMPARE_BRANCH}...HEAD`
-→ Review both PR and local changes
+
+Ask:
+Enter PR URL or PR number
+
+Run:
+
+`gh pr diff <number|url>`
+`git diff ${COMPARE_BRANCH}...HEAD`
+
+Review both PR changes and local changes.
 
 ────────────────────────
 REVIEW FOCUS
@@ -149,7 +167,7 @@ Include:
 
 Label unrelated issues as:
 
-[Pre-existing]
+`[Pre-existing]`
 
 ---
 
@@ -159,14 +177,18 @@ Label unrelated issues as:
 • Follow Conventional Commit format
 
 ────────────────────────
-CONFIRMATION (REQUIRED)
+FINAL INTERACTION FLOW
 ────────────────────────
 
-Do not apply fixes, post comments, or create commits yet.
+After generating the review summary, follow this interaction strictly.
 
-End with:
+STEP 1 — Ask for summary confirmation
 
-**Review ready.**
+Display ONLY the message below:
+
+---
+
+Review ready.
 
 Please confirm the summary:
 
@@ -174,10 +196,25 @@ Please confirm the summary:
 • Reply `0` to keep all issues
 • I will then reorder and finalize the summary
 
+---
+
+STOP.
+
+Wait for the user's response.
+
+Do NOT show the next step yet.
+
+---
+
+STEP 2 — After confirmation
+
+When the user replies with `0` or `Skip: ...`, then display:
+
 How should I proceed?
 
 1. Prepare GitHub review comments and suggested commits
 2. Apply confirmed fixes directly
 3. Share findings report only
+
 
 ```
