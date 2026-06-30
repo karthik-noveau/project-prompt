@@ -3,11 +3,18 @@
 **Goal:** Understand the functionality first, then the code changes.
 
 ```text
-Analyze the code changes and generate a collapsed ASCII execution map of the impacted functionality.
+Analyze the code changes and explain the impacted functionality as a working flow.
 
-First, explain the complete functionality flow from trigger to completion, showing only the major touch points and briefly describing each node's purpose and key technical terms.
+Generate a collapsed hierarchical ASCII tree (similar to the Linux `tree` command). Do NOT use boxes, tables, or flowcharts.
 
-Then, summarize the code changes by mapping them to the execution flow, explaining each change in a single line and where it impacts the functionality.
+First, show the complete functionality flow from trigger to completion using only the major touch points.
+
+For each node, briefly explain:
+- What happens?
+- Why is it needed?
+- Key technical terms (if any)
+
+Then, under the relevant node, summarize the code changes in a single line.
 
 Skip implementation details and unrelated branches.
 ```
@@ -16,14 +23,28 @@ Skip implementation details and unrelated branches.
 
 # 2. Code Changes — Deep Technical
 
-**Goal:** Understand the functionality, then how the changes are implemented.
+**Goal:** Understand the functionality, then the implementation behind the changes.
 
 ```text
-Analyze the code changes and generate a detailed ASCII execution map of the impacted functionality.
+Analyze the code changes and explain the impacted functionality as a detailed working flow.
 
-First, explain the complete functionality flow from trigger to completion.
+Generate a hierarchical ASCII tree (Linux `tree` style). Do NOT use boxes, tables, or flowcharts.
 
-Then, recursively expand only the impacted execution path to the lowest meaningful level. For each node, explain its purpose, inputs, outputs, data/control flow, technical terms, dependencies, edge cases, and conclude with a single-line explanation of the code change at that node.
+First, show the complete functionality flow from trigger to completion.
+
+Then, recursively expand only the impacted branches to the lowest meaningful level.
+
+For each node, explain:
+- Purpose
+- Inputs
+- Outputs
+- Internal processing
+- Data/control flow
+- Technical terms
+- Dependencies
+- Edge cases
+
+Under each affected node, explain the related code change in one line.
 
 Skip unrelated branches.
 ```
@@ -32,22 +53,47 @@ Skip unrelated branches.
 
 # 3. Feature — High Level
 
-**Goal:** Understand the complete feature workflow.
+**Goal:** Understand how the complete feature works.
 
 ```text
-Analyze the complete feature and generate a collapsed ASCII execution map.
+Analyze the complete feature and explain it as a working flow.
 
-Trace the complete lifecycle from trigger to completion, showing the major touch points and how they connect. Briefly explain each node's purpose and key technical terms. Skip implementation details and unrelated branches.
+Generate a collapsed hierarchical ASCII tree (Linux `tree` style). Do NOT use boxes, tables, or flowcharts.
+
+Trace the functionality from trigger to completion, showing only the major touch points.
+
+For each node, briefly explain:
+- What happens?
+- Why is it needed?
+- Key technical terms (if any)
+
+Skip implementation details and unrelated branches.
 ```
 
 ---
 
 # 4. Feature — Deep Technical
 
-**Goal:** Master the feature implementation.
+**Goal:** Understand the complete implementation of the feature.
 
 ```text
-Analyze the complete feature and generate a detailed ASCII execution map.
+Analyze the complete feature and explain it as a detailed working flow.
 
-Recursively expand the execution path to the lowest meaningful level. For each node, explain its purpose, inputs, outputs, data/control flow, technical terms, dependencies, design decisions, edge cases, and interactions with related modules. Skip unrelated functionality.
+Generate a hierarchical ASCII tree (Linux `tree` style). Do NOT use boxes, tables, or flowcharts.
+
+Recursively expand the execution path to the lowest meaningful level.
+
+For each node, explain:
+- Purpose
+- Inputs
+- Outputs
+- Internal processing
+- Data/control flow
+- Technical terms
+- Dependencies
+- Design decisions
+- Edge cases
+- Interactions with related modules
+
+Skip unrelated functionality.
 ```
