@@ -1,38 +1,36 @@
 # 1. Code Changes — High Level
 
-**Goal:** Understand how the functionality works first, then identify what changed.
+**Goal:** Understand the functionality first, then identify the code changes.
 
 ```text
-Analyze the code changes and organize the impacted functionality into a hierarchical functional tree.
+Analyze the code changes and organize the impacted functionality into a top-down hierarchical architecture diagram.
 
-Start with the highest-level responsibilities, then recursively group related touch points under each responsibility while preserving the execution order within each branch.
+Use an organization-chart style ASCII visualization (not a Linux tree). Group related responsibilities into major branches, then recursively group their touch points beneath them while preserving execution order within each branch.
 
-Include intermediate touch points required to understand the flow, even if they are unchanged.
-
-For each node briefly explain:
+After the diagram, explain each branch in execution order:
 - Responsibility
 - Purpose
-- What happens next
+- How it connects to the next branch
 
-Under each changed node, summarize the code change in one line.
+Include intermediate touch points required to understand the flow, even if unchanged.
 
-Use only a hierarchical ASCII tree (top-down branching). Do NOT generate a linear execution flow, flowchart, boxes, or tables.
+Finally, under each affected touch point, summarize the related code change in one line.
+
+Do NOT use flowcharts, boxes, or tables.
 ```
 
 ---
 
 # 2. Code Changes — Deep Technical
 
-**Goal:** Understand how the functionality works internally and how the code changes are implemented.
+**Goal:** Understand the functionality and implementation of the changed code.
 
 ```text
-Analyze the code changes and organize the impacted functionality into a detailed hierarchical functional tree.
+Analyze the code changes and organize the impacted functionality into a detailed top-down hierarchical architecture diagram.
 
-Start from the top-level functionality, recursively decompose it into responsibilities, execution touch points, and implementation steps while preserving execution order within each branch.
+Use an organization-chart style ASCII visualization. Start from the highest-level functionality and recursively decompose it into responsibilities, execution touch points, and implementation steps while preserving execution order within each branch.
 
-Include intermediate touch points required to understand the flow, even if they are unchanged.
-
-For each node explain:
+After the diagram, explain each branch from top to bottom:
 - Responsibility
 - Purpose
 - Inputs
@@ -40,16 +38,18 @@ For each node explain:
 - Internal processing
 - Technical terms
 - Dependencies
-- Why it leads to the next touch point
+- Why it connects to the next touch point
 
-Under each changed node explain:
+Include intermediate touch points required to understand the flow, even if unchanged.
+
+Under every changed touch point explain:
 - What changed
 - Why it changed
 - Impact
 
 Expand only branches related to the code changes.
 
-Use only a hierarchical ASCII tree (top-down branching). Do NOT use boxes, flowcharts, or tables.
+Do NOT use flowcharts, boxes, or tables.
 ```
 
 ---
@@ -59,18 +59,18 @@ Use only a hierarchical ASCII tree (top-down branching). Do NOT use boxes, flowc
 **Goal:** Understand the complete feature workflow.
 
 ```text
-Analyze the complete feature and organize it into a hierarchical functional tree.
+Analyze the complete feature and organize it into a top-down hierarchical architecture diagram.
 
-Start with the highest-level responsibilities, then recursively group related touch points while preserving execution order within each branch.
+Use an organization-chart style ASCII visualization. Group the feature into major responsibilities, then recursively organize related touch points while preserving execution order within each branch.
+
+After the diagram, explain each branch in execution order:
+- Responsibility
+- Purpose
+- How it connects to the next branch
 
 Include important intermediate touch points required to understand the feature.
 
-For each node briefly explain:
-- Responsibility
-- Purpose
-- What happens next
-
-Use only a hierarchical ASCII tree (top-down branching). Do NOT generate a linear execution flow, flowchart, boxes, or tables.
+Do NOT use flowcharts, boxes, or tables.
 ```
 
 ---
@@ -80,11 +80,11 @@ Use only a hierarchical ASCII tree (top-down branching). Do NOT generate a linea
 **Goal:** Master the complete feature implementation.
 
 ```text
-Analyze the complete feature and organize it into a detailed hierarchical functional tree.
+Analyze the complete feature and organize it into a detailed top-down hierarchical architecture diagram.
 
-Start from the top-level functionality, recursively decompose it into responsibilities, execution touch points, and implementation steps while preserving execution order within each branch.
+Use an organization-chart style ASCII visualization. Start from the highest-level functionality and recursively decompose it into responsibilities, execution touch points, and implementation steps while preserving execution order within each branch.
 
-For each node explain:
+After the diagram, explain each branch from top to bottom:
 - Responsibility
 - Purpose
 - Inputs
@@ -98,5 +98,5 @@ For each node explain:
 
 Expand every important branch required to understand the feature.
 
-Use only a hierarchical ASCII tree (top-down branching). Do NOT use boxes, flowcharts, or tables.
+Do NOT use flowcharts, boxes, or tables.
 ```
