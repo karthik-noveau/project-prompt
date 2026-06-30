@@ -1,88 +1,102 @@
 # 1. Code Changes — High Level
 
-**Goal:** Understand the complete working flow first, then the code changes.
+**Goal:** Understand how the functionality works first, then identify what changed.
 
 ```text
-Analyze the code changes and explain the impacted functionality as a continuous working flow.
+Analyze the code changes and organize the impacted functionality into a hierarchical functional tree.
 
-Generate a simple hierarchical ASCII flow (Linux `tree` style). Follow the actual execution from trigger to completion without skipping intermediate touch points required to understand the flow, even if they are unchanged.
+Start with the highest-level responsibilities, then recursively group related touch points under each responsibility while preserving the execution order within each branch.
 
-For each touch point, briefly explain:
-- What happens?
-- Why is this step required?
-- What happens next?
+Include intermediate touch points required to understand the flow, even if they are unchanged.
 
-When a code change is encountered, explain it in one line directly under that step.
+For each node briefly explain:
+- Responsibility
+- Purpose
+- What happens next
 
-Skip implementation details and unrelated branches.
+Under each changed node, summarize the code change in one line.
+
+Use only a hierarchical ASCII tree (top-down branching). Do NOT generate a linear execution flow, flowchart, boxes, or tables.
 ```
 
 ---
 
 # 2. Code Changes — Deep Technical
 
-**Goal:** Understand the complete runtime flow and how the changes are implemented.
+**Goal:** Understand how the functionality works internally and how the code changes are implemented.
 
 ```text
-Analyze the code changes and explain the impacted functionality as a continuous technical working flow.
+Analyze the code changes and organize the impacted functionality into a detailed hierarchical functional tree.
 
-Generate a hierarchical ASCII flow (Linux `tree` style). Follow the runtime execution from trigger to completion, including every intermediate touch point required to understand the impacted path.
+Start from the top-level functionality, recursively decompose it into responsibilities, execution touch points, and implementation steps while preserving execution order within each branch.
 
-For each touch point explain:
+Include intermediate touch points required to understand the flow, even if they are unchanged.
+
+For each node explain:
+- Responsibility
 - Purpose
 - Inputs
 - Outputs
 - Internal processing
-- Data/control flow
 - Technical terms
+- Dependencies
 - Why it leads to the next touch point
 
-When a modified touch point is reached, explain the code change, why it was required, and its impact.
+Under each changed node explain:
+- What changed
+- Why it changed
+- Impact
 
-Expand only the impacted path. Skip unrelated branches.
+Expand only branches related to the code changes.
+
+Use only a hierarchical ASCII tree (top-down branching). Do NOT use boxes, flowcharts, or tables.
 ```
 
 ---
 
 # 3. Feature — High Level
 
-**Goal:** Understand how the complete feature works.
+**Goal:** Understand the complete feature workflow.
 
 ```text
-Analyze the complete feature and explain it as a continuous working flow.
+Analyze the complete feature and organize it into a hierarchical functional tree.
 
-Generate a simple hierarchical ASCII flow (Linux `tree` style). Follow the functionality from trigger to completion without skipping important intermediate touch points.
+Start with the highest-level responsibilities, then recursively group related touch points while preserving execution order within each branch.
 
-For each touch point briefly explain:
-- What happens?
-- Why is it required?
-- What happens next?
+Include important intermediate touch points required to understand the feature.
 
-Skip implementation details and unrelated branches.
+For each node briefly explain:
+- Responsibility
+- Purpose
+- What happens next
+
+Use only a hierarchical ASCII tree (top-down branching). Do NOT generate a linear execution flow, flowchart, boxes, or tables.
 ```
 
 ---
 
 # 4. Feature — Deep Technical
 
-**Goal:** Understand the complete implementation of the feature.
+**Goal:** Master the complete feature implementation.
 
 ```text
-Analyze the complete feature and explain it as a continuous technical working flow.
+Analyze the complete feature and organize it into a detailed hierarchical functional tree.
 
-Generate a hierarchical ASCII flow (Linux `tree` style). Follow the runtime execution from trigger to completion, expanding every important touch point to the lowest meaningful level.
+Start from the top-level functionality, recursively decompose it into responsibilities, execution touch points, and implementation steps while preserving execution order within each branch.
 
-For each touch point explain:
+For each node explain:
+- Responsibility
 - Purpose
 - Inputs
 - Outputs
 - Internal processing
-- Data/control flow
 - Technical terms
-- Design decisions
 - Dependencies
+- Design decisions
 - Edge cases
 - Why it connects to the next touch point
 
-Skip unrelated functionality.
+Expand every important branch required to understand the feature.
+
+Use only a hierarchical ASCII tree (top-down branching). Do NOT use boxes, flowcharts, or tables.
 ```
