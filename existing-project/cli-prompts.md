@@ -1,6 +1,13 @@
-# Code Understanding Prompts
+# AI Code Understanding Prompts
 
-## 🚀 Quick Explain
+A collection of reusable prompts to quickly understand code changes and feature execution flow from a runtime perspective.
+
+---
+
+<details>
+<summary><strong>🚀 Quick Explain</strong></summary>
+
+Copy the prompt below.
 
 ```text
 Analyze the code changes and reconstruct the runtime execution as a concise ASCII tree.
@@ -39,9 +46,14 @@ Rules:
 - Add a blank line between different entry points.
 ```
 
+</details>
+
 ---
 
-## 🔬 Deep Explain
+<details>
+<summary><strong>🔬 Deep Explain</strong></summary>
+
+Copy the prompt below.
 
 ```text
 Analyze the code changes by reverse engineering the complete runtime execution workflow from a new developer's perspective.
@@ -86,7 +98,7 @@ Execution Rules:
 - Show nested workflows as child branches.
 - Group helper/private/pass-through methods into the business execution step that owns them.
 - Collapse implementation details that do not change the business flow.
-- Name tree nodes using meaningful business responsibilities instead of raw method names.
+- Name tree nodes using meaningful business responsibilities (e.g. "Resolve Flow Service Type", "Create Pages", "Publish Page") instead of raw method names.
 - Mention the implementation location inline only when it helps understanding:
   (folder/file → Class/Component → Method/Function).
 - Keep [purpose], [change], [external], and [next] concise (1–2 lines).
@@ -94,3 +106,5 @@ Execution Rules:
 - Use only ASCII tree characters (├── │ └──).
 - Produce one continuous execution tree per entry point without separate architecture summaries or file-based sections.
 ```
+
+</details>
