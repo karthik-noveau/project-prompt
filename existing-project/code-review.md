@@ -1,5 +1,3 @@
-Here's the updated Markdown prompt with a strict, table-only output format.
-
 ````markdown
 # PR Review
 
@@ -113,37 +111,9 @@ Verify:
 
 ---
 
-# OUTPUT (STRICT)
+# Result
 
-The response **must contain only GitHub Markdown tables**.
-
-## Rules
-
-- Use **GitHub Markdown tables (`|`) only**.
-- **Do NOT** use ASCII/Unicode box tables (`┌ ─ ┐ │`).
-- **Do NOT** use bullet lists.
-- **Do NOT** use numbered lists.
-- **Do NOT** use prose outside the tables.
-- **Do NOT** use labels like:
-  - Severity:
-  - File:
-  - Line:
-  - Category:
-  - Issue:
-  - Recommended Fix:
-- Every finding must occupy **exactly one table row**.
-- Keep **Issue** and **Recommended Fix** concise (maximum 25 words each).
-- Split **File** and **Line** into separate columns.
-- Output **exactly three sections** in this order:
-  1. Review Summary
-  2. Findings
-  3. Result
-
-Any other format is incorrect.
-
----
-
-## Review Summary
+## Review summery should be table only 
 
 | # | Severity | File | Line | Category | Issue | Recommended Fix |
 |---|----------|------|-----:|----------|-------|-----------------|
@@ -155,27 +125,8 @@ Any other format is incorrect.
 
 ---
 
-## Result
-
-| Status | Value |
-|--------|-------|
-| Review | Complete |
-| Skip Issues | 0 |
-
-or
-
-| Status | Value |
-|--------|-------|
-| Review | Complete |
-| Skip Issues | #2, #5 |
-
----
-
 ## After Review
+1. ask what need to skip
+2. ask confirmation to apply the fixes
 
-After producing the report:
-
-1. Apply fixes (if requested).
 ````
-
-This version is much stricter about the response structure and should significantly increase the chances of getting clean GitHub-style Markdown tables instead of ASCII boxes or prose.
