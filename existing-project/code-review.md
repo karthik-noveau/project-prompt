@@ -1,19 +1,20 @@
-````text
-# Code Review
+````markdown
+# PR Review
 
-## Review Scope
+## Scope
 
 Mode:
-1. External PR → `gh pr diff <number|url>`
+1. External → `gh pr diff <number|url>`
 2. Local → `git diff main...HEAD`
 3. Self PR → both
 
-Review **only changed code**.
+Review **changed code only**.
 
-Ignore unrelated existing issues.
-If a touched file contains an old issue, report it as **[Pre-existing]**.
+- Ignore unrelated issues.
+- Existing issues in touched files → ⚪ Pre-existing.
+- Verify every PR description requirement.
 
-Run before review:
+Run first:
 
 ```bash
 npm run lint
@@ -21,172 +22,139 @@ npm test
 npx tsc --noEmit
 ```
 
-Fix failures before continuing.
+Fix failures before reviewing.
 
-Verify every item in the PR description.
-Missing required implementation/tests → BLOCKER.
-
----
-
-# Stop after the first BLOCKER.
-
-## 1. Codebase Consistency [BLOCKER]
-
-Ensure changes follow existing project conventions.
-
-- folder structure
-- naming
-- imports
-- hooks/utilities/components reused
-- state management
-- API pattern
-- styling pattern
-- error handling
-- no unnecessary abstraction
-- no new dependency unless justified
+> Stop after the **first 🔴 BLOCKER**.
 
 ---
 
-## 2. Breaking Changes [BLOCKER]
+## Checks
 
-Trace every changed public API.
+### 1. Codebase Consistency 🔴
+Verify project conventions:
+- Structure
+- Naming
+- Imports
+- Reuse existing hooks/components/utils
+- State/API/style patterns
+- Error handling
+- No unnecessary abstraction/dependencies
 
+### 2. Breaking Changes 🔴
 Verify:
+- Public APIs
+- Existing callers
+- Props
+- Request/response shape
+- Shared exports
+- Deleted code has no consumers
 
-- callers still work
-- props unchanged
-- response shape unchanged
-- shared exports still valid
-- deleted code has no consumers
-
----
-
-## 3. Correctness [BLOCKER]
-
-Trace:
-
-- happy path
-- null/undefined
-- empty input
-- boundary values
-- invalid input
-- legacy data
-
+### 3. Correctness 🔴
 Verify:
+- Happy path
+- Null/undefined
+- Empty/boundary/invalid input
+- Legacy data
+- Validation
+- Payload correctness
+- Loading/error/empty states
+- No accidental mutation
+- No debug/commented code
 
-- validation
-- conditions
-- payload correctness
-- no accidental mutation
-- loading/error/empty states
-- no debug/commented code
-
----
-
-## 4. Async & State [BLOCKER]
-
+### 4. Async & State 🔴
 Verify:
+- Async error handling
+- Cleanup
+- Hook dependencies
+- Race conditions
+- Consistent async pattern
+- Optimistic rollback
 
-- async errors handled
-- no silent catch
-- no mixed async styles
-- cleanup on unmount
-- hook dependencies complete
-- race conditions handled
-- optimistic updates rollback
-
----
-
-## 5. Security [BLOCKER]
-
-Check:
-
+### 5. Security 🔴
+Verify:
 - XSS
-- auth
-- secrets
-- logging
-- URL validation
+- Auth/AuthZ
+- Secrets
+- Sensitive logging
+- URL/input validation
+
+### 6. Reliability 🟠
+Check invalid input, network failures, retries, cleanup, recursion guards.
+
+### 7. Performance 🟠
+Check unnecessary renders, unstable references, memoization, duplicate requests, virtualization.
+
+### 8. Maintainability 🟠
+Check duplication, magic values, large functions, nesting, imports, dead code.
+
+### 9. Tests 🟠
+Verify new logic, edge cases, error paths, and existing tests.
 
 ---
 
-## 6. Reliability [REQUIRED]
+# Output
 
-Check:
+## Review Summary
 
-- invalid input
-- network failure
-- empty states
-- cleanup
-- recursion guard
-
----
-
-## 7. Performance [REQUIRED]
-
-Check:
-
-- expensive render work
-- unnecessary renders
-- unstable references
-- memoization
-- virtualization when applicable
+| Metric | Count |
+|--------|------:|
+| Files Reviewed | <count> |
+| 🔴 BLOCKER | <count> |
+| 🟠 REQUIRED | <count> |
+| 🟡 SUGGESTED | <count> |
+| ⚪ Pre-existing | <count> |
 
 ---
 
-## 8. Maintainability [REQUIRED]
+## Findings
 
-Check:
-
-- duplicated logic
-- duplicated types
-- magic values
-- large functions
-- deep nesting
-- import order
+| # | Severity | File:Line | Category | Issue | Recommended Fix |
+|---|----------|-----------|----------|-------|-----------------|
+| 1 | 🔴 BLOCKER | `path/file.ts:120` | Breaking Changes | Describe the issue clearly. | Describe the exact fix. |
+| 2 | 🟠 REQUIRED | `path/file.ts:86` | Reliability | Describe the issue. | Recommended fix. |
+| 3 | 🟡 SUGGESTED | `path/file.ts:45` | Maintainability | Optional improvement. | Suggested improvement. |
+| 4 | ⚪ Pre-existing | `path/file.ts:20` | Maintainability | Existing issue unrelated to this PR. | Ignore for this PR. |
 
 ---
 
-## 9. Tests [REQUIRED]
+## Result
 
-Verify:
+### If a 🔴 BLOCKER exists
 
-- meaningful assertions
-- edge cases
-- error paths
-- existing tests still pass
+Stop immediately after reporting the first BLOCKER.
 
----
+```text
+Review stopped after the first BLOCKER.
 
-## Output
+Wait.
+```
 
-FILE:
-LINE:
-SEVERITY: BLOCKER | REQUIRED | SUGGESTED | [Pre-existing]
+### Otherwise
 
-ISSUE:
-
-FIX:
-
----
-
-Summary
-
-BLOCKER:
-REQUIRED:
-Pre-existing:
-
+```text
 Review complete.
 
 Skip issues:
 0
+```
+
 or
-Skip: <numbers>
+
+```text
+Review complete.
+
+Skip:
+#2, #5
+```
 
 Wait.
 
-Then:
+---
 
-1. GitHub inline comments + suggested commits
-2. Apply fixes
-3. Report only
+## After User Continues
+
+1. Generate GitHub inline review comments.
+2. Generate suggested commits.
+3. Apply fixes (if requested).
+4. Report only the applied changes.
 ````
