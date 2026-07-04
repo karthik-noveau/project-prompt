@@ -190,5 +190,3 @@ Then:
 2. Apply fixes
 3. Report only
 ````
-
-For even better results with Claude Code or Codex, I'd recommend making it **rule-based** instead of checklist-based (around 40–50 lines). That style tends to produce more consistent reviews while using significantly fewer tokens.
