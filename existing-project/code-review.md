@@ -1,3 +1,5 @@
+Here's the updated Markdown prompt with a strict, table-only output format.
+
 ````markdown
 # PR Review
 
@@ -12,9 +14,9 @@ Review **changed code only**.
 
 - Ignore unrelated issues.
 - Existing issues in touched files → ⚪ Pre-existing.
-- Verify every PR description requirement.
+- Verify every requirement in the PR description.
 
-Run first:
+Run before review:
 
 ```bash
 npm run lint
@@ -22,25 +24,23 @@ npm test
 npx tsc --noEmit
 ```
 
-Fix failures before reviewing.
-
-> Stop after the **first 🔴 BLOCKER**.
+Fix any failures before continuing.
 
 ---
 
-## Checks
+# Review Checklist
 
-### 1. Codebase Consistency 🔴
-Verify project conventions:
+## 1. Codebase Consistency 🔴
+Verify:
 - Structure
 - Naming
 - Imports
 - Reuse existing hooks/components/utils
 - State/API/style patterns
 - Error handling
-- No unnecessary abstraction/dependencies
+- No unnecessary abstraction or dependencies
 
-### 2. Breaking Changes 🔴
+## 2. Breaking Changes 🔴
 Verify:
 - Public APIs
 - Existing callers
@@ -49,7 +49,7 @@ Verify:
 - Shared exports
 - Deleted code has no consumers
 
-### 3. Correctness 🔴
+## 3. Correctness 🔴
 Verify:
 - Happy path
 - Null/undefined
@@ -61,100 +61,121 @@ Verify:
 - No accidental mutation
 - No debug/commented code
 
-### 4. Async & State 🔴
+## 4. Async & State 🔴
 Verify:
 - Async error handling
 - Cleanup
 - Hook dependencies
 - Race conditions
-- Consistent async pattern
+- Consistent async patterns
 - Optimistic rollback
 
-### 5. Security 🔴
+## 5. Security 🔴
 Verify:
 - XSS
-- Auth/AuthZ
+- Authentication / Authorization
 - Secrets
 - Sensitive logging
-- URL/input validation
+- URL & input validation
 
-### 6. Reliability 🟠
-Check invalid input, network failures, retries, cleanup, recursion guards.
+## 6. Reliability 🟠
+Verify:
+- Invalid input
+- Network failures
+- Retry logic
+- Cleanup
+- Infinite recursion/loop guards
 
-### 7. Performance 🟠
-Check unnecessary renders, unstable references, memoization, duplicate requests, virtualization.
+## 7. Performance 🟠
+Verify:
+- Unnecessary renders
+- Unstable references
+- Memoization
+- Duplicate requests
+- Virtualization (where applicable)
 
-### 8. Maintainability 🟠
-Check duplication, magic values, large functions, nesting, imports, dead code.
+## 8. Maintainability 🟠
+Verify:
+- Duplicate logic/types
+- Magic values
+- Large functions
+- Deep nesting
+- Import order
+- Dead code
+- Readability
 
-### 9. Tests 🟠
-Verify new logic, edge cases, error paths, and existing tests.
+## 9. Tests 🟠
+Verify:
+- New logic covered
+- Edge cases
+- Error paths
+- Existing tests still pass
 
 ---
 
-# Output
+# OUTPUT (STRICT)
+
+The response **must contain only GitHub Markdown tables**.
+
+## Rules
+
+- Use **GitHub Markdown tables (`|`) only**.
+- **Do NOT** use ASCII/Unicode box tables (`┌ ─ ┐ │`).
+- **Do NOT** use bullet lists.
+- **Do NOT** use numbered lists.
+- **Do NOT** use prose outside the tables.
+- **Do NOT** use labels like:
+  - Severity:
+  - File:
+  - Line:
+  - Category:
+  - Issue:
+  - Recommended Fix:
+- Every finding must occupy **exactly one table row**.
+- Keep **Issue** and **Recommended Fix** concise (maximum 25 words each).
+- Split **File** and **Line** into separate columns.
+- Output **exactly three sections** in this order:
+  1. Review Summary
+  2. Findings
+  3. Result
+
+Any other format is incorrect.
+
+---
 
 ## Review Summary
 
-| Metric | Count |
-|--------|------:|
-| Files Reviewed | <count> |
-| 🔴 BLOCKER | <count> |
-| 🟠 REQUIRED | <count> |
-| 🟡 SUGGESTED | <count> |
-| ⚪ Pre-existing | <count> |
+| # | Severity | File | Line | Category | Issue | Recommended Fix |
+|---|----------|------|-----:|----------|-------|-----------------|
+| 1 | 🔴 BLOCKER | `src/example.ts` | 120 | Breaking Changes | Short issue description. | Short actionable fix. |
+| 2 | 🟠 REQUIRED | `src/example.ts` | 86 | Reliability | Short issue description. | Short actionable fix. |
+| 3 | 🟡 SUGGESTED | `src/example.ts` | 45 | Maintainability | Short improvement. | Suggested improvement. |
+| 4 | ⚪ Pre-existing | `src/example.ts` | 20 | Maintainability | Existing issue unrelated to this PR. | Ignore for this PR. |
 
----
-
-## Findings
-
-| # | Severity | File:Line | Category | Issue | Recommended Fix |
-|---|----------|-----------|----------|-------|-----------------|
-| 1 | 🔴 BLOCKER | `path/file.ts:120` | Breaking Changes | Describe the issue clearly. | Describe the exact fix. |
-| 2 | 🟠 REQUIRED | `path/file.ts:86` | Reliability | Describe the issue. | Recommended fix. |
-| 3 | 🟡 SUGGESTED | `path/file.ts:45` | Maintainability | Optional improvement. | Suggested improvement. |
-| 4 | ⚪ Pre-existing | `path/file.ts:20` | Maintainability | Existing issue unrelated to this PR. | Ignore for this PR. |
 
 ---
 
 ## Result
 
-### If a 🔴 BLOCKER exists
-
-Stop immediately after reporting the first BLOCKER.
-
-```text
-Review stopped after the first BLOCKER.
-
-Wait.
-```
-
-### Otherwise
-
-```text
-Review complete.
-
-Skip issues:
-0
-```
+| Status | Value |
+|--------|-------|
+| Review | Complete |
+| Skip Issues | 0 |
 
 or
 
-```text
-Review complete.
-
-Skip:
-#2, #5
-```
-
-Wait.
+| Status | Value |
+|--------|-------|
+| Review | Complete |
+| Skip Issues | #2, #5 |
 
 ---
 
-## After User Continues
+## After Review
 
-1. Generate GitHub inline review comments.
-2. Generate suggested commits.
-3. Apply fixes (if requested).
-4. Report only the applied changes.
+After producing the report:
+
+1. Apply fixes (if requested).
 ````
+
+This version is much stricter about the response structure and should significantly increase the chances of getting clean GitHub-style Markdown tables instead of ASCII boxes or prose.
