@@ -1,9 +1,8 @@
-````markdown
+```text
 # Codebase Architecture
 
 ## Structure
 
-```text
 src/
   assets/
     ├── logo/
@@ -35,7 +34,6 @@ src/
     └── font.css
 
   App.tsx
-```
 
 ## Boundaries
 
@@ -96,7 +94,6 @@ No uppercase in any folder name.
 
 ## Testing
 
-```text
 common/components/avatar_card/
   avatar_card.tsx
   avatar_card.test.tsx
@@ -104,8 +101,7 @@ common/components/avatar_card/
 pages/<name>/hooks/
   useFormState.ts
   useFormState.test.ts
-```
 
 - Unit tests co-located with source file
 - Integration tests in `__tests__/` at project root
-````
+```
