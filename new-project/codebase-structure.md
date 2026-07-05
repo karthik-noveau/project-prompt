@@ -1,8 +1,9 @@
+````markdown
 # Codebase Architecture
 
 ## Structure
 
-```
+```text
 src/
   assets/
     ├── logo/
@@ -95,7 +96,7 @@ No uppercase in any folder name.
 
 ## Testing
 
-```
+```text
 common/components/avatar_card/
   avatar_card.tsx
   avatar_card.test.tsx
@@ -107,3 +108,4 @@ pages/<name>/hooks/
 
 - Unit tests co-located with source file
 - Integration tests in `__tests__/` at project root
+````
