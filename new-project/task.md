@@ -131,4 +131,9 @@ Approve?
 - No forward assumptions (engine N cannot know engine N+1's shape)
 - No new libraries without explicit approval
 - Every engine leaves the codebase in a working, committable state
+
+## Create each page design before the development need to confirm the design
+
+- Generate high-fidelity HTML mockups for every page
+
 ```
