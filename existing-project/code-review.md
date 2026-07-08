@@ -1,4 +1,4 @@
-````markdown
+````text
 # PR Review
 
 ## Scope
