@@ -2,16 +2,13 @@
 
 AI prompt library for React codebases.
 
-## new-project — Personal 
-- `codebase-structure.md` — paste at session start
-- `task.md` — engine-based generation, one scope at a time
-- `code-review.md` — gate after each engine
+## new-project — Personal
+- `lint.md` — ESLint + tsconfig + Vite + aliases, run once
+- `task.md` — spec → codebase guide → engines, one scope at a time
+- `code-review.md` — gate after each engine, stops at first blocker
 
 ## existing-project — Office
-- `codebase-structure.md` — fill once, paste before every Figma task
+- `codebase-understand.md` — runtime execution flow as an ASCII tree
 - `code-review.md` — PR review: external / local / self
-
-## config
-- `lint.md` — ESLint + Vite + aliases
-- `mcp.md` — GitHub MCP for live PR diff access
-
+- `website-to-code.md` — live URL → screen: extract, implement, verify, fix
+- `mcp-config.md` — GitHub MCP for live PR diff access
