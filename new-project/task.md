@@ -3,7 +3,7 @@
 <details>
 <summary><strong>📋 Task Generation (task-generation.md)</strong></summary>
 
-````text
+````md
 # AI PROJECT SPECIFICATION & DEVELOPMENT PROTOCOL
 
 The application MUST NOT generate any application source code until the complete `spec/` directory has been generated and approved.
@@ -72,7 +72,7 @@ Implementation Order
 <details>
 <summary><strong>📚 Codebase Guide (codebase-guide.md)</strong></summary>
 
-```text
+```md
 # Codebase Architecture
 
 ## Structure
@@ -279,7 +279,7 @@ __tests__/
 <details>
 <summary><strong>🚀 Development (development.md)</strong></summary>
 
-```text
+```md
 # Development Workflow
 
 ## Phase 1
