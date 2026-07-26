@@ -1,4 +1,3 @@
-`````markdown
 # AI Project Development Protocol
 
 <details>
@@ -293,9 +292,3 @@ Never fail silently.
 
 </details>
 ````
-
-This structure gives you **three independent, fully copyable accordion sections**, each containing a complete Markdown (`.md`) file:
-
-1. 📋 `task-generation.md`
-2. 📚 `codebase-guide.md`
-3. 🚀 `development.md`
