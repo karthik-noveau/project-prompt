@@ -1,116 +1,301 @@
-````text
-# Project Task Generation
+`````markdown
+# AI Project Development Protocol
 
-Generate the complete project specification inside the `spec/` directory before writing any application source code.
+<details>
+<summary><strong>📋 Task Generation (task-generation.md)</strong></summary>
+
+````md
+# AI PROJECT SPECIFICATION & DEVELOPMENT PROTOCOL
+
+The application MUST NOT generate any application source code until the complete `spec/` directory has been generated and approved.
+
+The `spec/` directory is the single source of truth for architecture, UI, workflows, implementation order and development rules.
 
 ## Directory Structure
 
-```text
 spec/
 ├── architecture.md
 ├── codebase-guide.md
 ├── ui-prototypes/
+│   ├── <page-1>.html
+│   ├── <page-2>.html
+│   └── ...
 └── engines/
+    ├── engine-01-<work-name>.md
+    ├── engine-02-<work-name>.md
+    └── ...
+
+## Rules
+
+- Generate the complete `spec/` directory before writing any application source code.
+- `architecture.md` must contain the complete implementation blueprint.
+- `codebase-guide.md` must remain completely empty.
+- Create one HTML UI prototype per page.
+- Split implementation into independent engines.
+- Each engine must have:
+  - Objective
+  - Scope
+  - Dependencies
+  - Files to modify
+  - Implementation steps
+  - Acceptance criteria
+  - Edge cases
+  - Validation checklist
+  - Test cases
+  - Completion checklist
+- Complete one engine at a time.
+- Stop after every engine and request approval.
+- Never generate future engine source code before approval.
+
+`````
+
+</details>
+
+---
+
+<details>
+<summary><strong>📚 Codebase Guide (codebase-guide.md)</strong></summary>
+
+```md
+# Codebase Architecture
+
+## Structure
+
+src/
+  assets/
+    ├── logos/
+    ├── icons/
+    └── <page-name>/
+
+  common/
+    ├── api/
+    ├── components/
+    ├── constants/
+    ├── hooks/
+    └── utils/
+
+  store/
+    └── <domain>.store.ts
+
+  pages/
+    <page-name>/
+      ├── index.tsx
+      ├── components/
+      ├── hooks/
+      ├── constants.ts
+      ├── types.ts
+      ├── utils.ts
+      ├── mocks/
+      └── styles.module.css
+
+  theme/
+    ├── colours.css
+    ├── fonts.css
+    └── overrides.css
+
+  App.tsx
+
+## Boundaries
+
+| Location | Rule |
+|----------|------|
+| spec/ | Source of truth |
+| common/ | Shared modules only |
+| common/api/ | Data loading |
+| common/components/ | Reusable components |
+| store/ | Zustand stores |
+| pages/<page>/ | Self-contained feature |
+| theme/ | Global styles |
+| App.tsx | Bootstrap and routing |
+
+## Naming
+
+- Folders → kebab-case
+- Components → PascalCase.tsx
+- Hooks → useCamelCase.ts
+- Utilities → camelCase.ts
+- Types → types.ts
+- Constants → constants.ts
+- Stores → <domain>.store.ts
+- CSS Modules → styles.module.css
+
+## TypeScript
+
+- Strict mode
+- Never use any
+- Explicit return types
+- Prefer type over interface
+
+## React
+
+- Functional components
+- Hooks only
+- Composition in index.tsx
+- Business logic in hooks/stores
+
+## Routing
+
+- React Router
+- Lazy-loaded pages
+- Central route config
+- 404 page
+
+## State
+
+- Zustand
+- One store per domain
+- Derived values computed
+- No direct mutation
+
+## Styling
+
+- CSS Modules only
+- No inline styles
+- No Tailwind
+- No Styled Components
+- Colours from theme/colours.css
+
+## Testing
+
+- Jest
+- React Testing Library
+- Co-located unit tests
+- Integration tests in __tests__
+
+## Forbidden
+
+- any
+- console.log
+- debugger
+- TODO
+- FIXME
+- Hardcoded colours
+- Dead code
+- Cross-page imports
+
 ```
 
-## Tech Stack
+</details>
 
-```text
-Framework : React
-Language  : TypeScript
-Build     : Vite
-State     : Zustand
-Styling   : CSS Modules
-Routing   : React Router
-Testing   : Jest + React Testing Library
-```
+---
 
-## architecture.md
+<details>
+<summary><strong>🚀 Development (development.md)</strong></summary>
 
-Create comprehensive technical documentation covering:
+```md
+# Development Workflow
 
-- Overall application architecture
-- Module and folder structure
-- End-to-end application flow
-- Libraries, frameworks, and major dependencies
-- Business logic and feature workflows
-- Component hierarchy and interactions
-- State management flow
-- Routing structure
-- Data flow between modules
-- Folder responsibilities
-- Design decisions
-- Assumptions and constraints
-- ASCII flow diagrams for every major workflow
+## Phase 1
 
-This document must serve as the complete implementation blueprint.
+Generate the complete `spec/` directory.
 
-## codebase-guide.md
+Required files:
 
-- Create this file as an empty file only.
-- Never write, modify, or populate its contents.
+- architecture.md
+- codebase-guide.md
+- ui-prototypes/
+- engines/
 
-## ui-prototypes/
+Wait for approval.
 
-Create one minimized HTML prototype for every application page.
+---
+
+## Phase 2
+
+Implement Engine 01.
 
 Requirements:
 
-- One HTML file per page.
-- UI only (no application logic).
-- Responsive layout.
-- Proper spacing and alignment.
-- Typography.
-- Colour palette.
-- Component positioning.
-- Visual hierarchy.
-- Overall UX structure.
+- Complete implementation
+- Validation
+- Unit tests
+- Integration tests
+- TypeScript passes
+- ESLint passes
 
-Prototype Rules:
+Stop.
 
-- These are not wireframes or mock-ups.
-- They represent the final approved UI.
-- During development, every React page must match its corresponding prototype as closely as possible.
-- Layout, spacing, colours, typography, sizing, alignment, responsiveness, and visual hierarchy must remain consistent.
-- Treat these prototypes as the single source of truth for the application's UI.
+Wait for approval.
 
-## engines/
+---
 
-Split the implementation into multiple independent development engines.
+## Phase 3
 
-Naming Convention:
+Implement Engine 02.
 
-```text
-engine-01-<work_name>.md
-engine-02-<work_name>.md
-engine-03-<work_name>.md
-...
+Repeat the same process.
+
+Continue until all engines are complete.
+
+---
+
+## General Rules
+
+- Never implement multiple engines together.
+- Never skip engines.
+- Never partially implement an engine.
+- Never generate future engine code.
+- Every engine must pass:
+  - Build
+  - TypeScript
+  - ESLint
+  - Jest
+
+---
+
+## Quality Checklist
+
+- DRY
+- KISS
+- SOLID
+- Composition over inheritance
+- Early returns
+- No duplicate logic
+- No deep nesting
+- No dead code
+- No unused imports
+- No unused variables
+
+---
+
+## Performance
+
+- Lazy loading
+- Memoization
+- Split large components
+- Avoid unnecessary renders
+
+---
+
+## Accessibility
+
+- Semantic HTML
+- Keyboard support
+- ARIA attributes
+- Labels
+- Focus states
+- Colour contrast
+
+---
+
+## Error Handling
+
+Every feature must support:
+
+- Loading
+- Success
+- Empty
+- Error
+
+Never fail silently.
+
 ```
 
-Each engine must contain:
-
-- Objective
-- Scope
-- Dependencies
-- Files to create or modify
-- Implementation steps
-- Acceptance criteria
-- Edge cases
-- Validation checklist
-- Test cases
-- Completion checklist
-
-Rules:
-
-- One engine must perform exactly one responsibility.
-- Never combine unrelated work into a single engine.
-- Every engine must be fully implemented before the next begins.
-- Include implementation, validation, and complete test coverage.
-- All tests must pass before an engine is considered complete.
-- Later engines may depend only on previously completed engines.
-- Never skip, partially implement, or merge engines.
-- Stop after completing each engine and request confirmation before starting the next.
-- Do not generate source code for future engines until the current engine is completed and approved.
-
-Generate the entire `spec/` directory first. Only after it has been completed and approved may application source code be generated.
+</details>
 ````
+
+This structure gives you **three independent, fully copyable accordion sections**, each containing a complete Markdown (`.md`) file:
+
+1. 📋 `task-generation.md`
+2. 📚 `codebase-guide.md`
+3. 🚀 `development.md`
