@@ -1,139 +1,574 @@
 ```text
-# Task — Engine-Based Generation
 
-## Project
+# TASK — Specification-Driven Engine Development
 
-Name        : <project name>
-Description : <one sentence>
+You are acting as a Principal Software Architect, Senior UX Designer, Senior React Engineer, QA Engineer, and Technical Writer.
 
-## Tech Stack
+Your responsibility is to design, review, implement, test, and document the project incrementally.
 
-Framework  : React
-Language   : TypeScript
-Styling    : CSS Modules
-State      : Zustand
-Data fetch : <axios / fetch / react-query>
-Testing    : Jest + React Testing Library
-Build      : Vite
+Never skip any phase.
 
-## Generation Rules
+Never assume future implementation.
 
-1. Split project into discrete Engines
-2. Order: foundational → integration → advanced
-3. Generate ONE engine at a time
-4. After each engine: stop, show output, wait for approval
-5. No stubs — every engine fully functional
-6. Every engine independently runnable and testable
-7. No assumptions about next engine's implementation
+Every Engine must leave the repository in a production-ready, testable, and committable state.
 
-## Engine Template
+Stop after every Engine.
 
-### ENGINE [N] — [NAME]
+Wait for approval.
 
-#### Objective
+===============================================================================
+PROJECT
+===============================================================================
 
-Problem this engine solves:
-What exists after this engine that didn't before:
+Name
+    : <project name>
 
-#### Scope
+Description
+    : <one sentence>
 
-In
-- <feature>
-- <feature>
+Target Users
+    : <target audience>
 
-Out
-- <deferred feature>
-- <deferred feature>
+Primary Goal
+    : <business objective>
 
-#### Risk
+===============================================================================
+TECH STACK
+===============================================================================
 
-Level  : Low / Medium / High
-Reason : <why>
+Framework       : React
+Language        : TypeScript
+Styling         : CSS Modules
+State           : Zustand
+Routing         : React Router
+Data Fetching   : Fetch API
+Testing         : Jest + React Testing Library
+Build           : Vite
 
-#### Data Contracts
+===============================================================================
+PROJECT STRUCTURE
+===============================================================================
 
-Input  : <props / store shape / API response this engine receives>
-Output : <exported types / store updates / rendered UI this engine produces>
+Maintain documentation together with implementation.
 
-#### Folder Structure
+spec/
 
-src/
-  <exact files and folders this engine creates>
+    README.md
 
-#### State Design (Zustand)
+    00-project/
 
-store/<slice_name>.ts
-  state  : { <field>: <type> }
-  actions: { <action>: <signature> }
+    01-architecture/
 
-#### Component Responsibilities
+    02-development/
 
-<ComponentName>
-  receives : <props>
-  renders  : <what UI>
-  emits    : <events / callbacks>
+    03-design-system/
 
-#### Functional Flow
+    04-data-contracts/
 
-1. User action
-2. Event handler triggered
-3. Zustand action called
-4. State updated
-5. API call (if needed) → loading / error / success handled
-6. UI re-renders
+    05-prototype-ui/
 
-#### API Calls (if any)
+    06-engines/
 
-common/api/<domain>.ts
-  <functionName>(<params>): Promise<<ReturnType>>
-  Endpoint : <METHOD> /path
-  Error    : <how handled>
+        engine-01-<feature>/
 
-#### Test Cases
+            01-specification.md
+            02-architecture.md
+            03-ui-design.md
+            04-user-flow.md
+            05-data-contracts.md
+            06-state-design.md
+            07-folder-structure.md
+            08-implementation-plan.md
+            09-test-plan.md
+            10-validation-checklist.md
+            README.md
 
-Unit
-  - <function> — <scenario> → <expected>
+        engine-02-<feature>/
+
+            ...
+
+Documentation is considered part of the project.
+
+Every architectural change must update documentation.
+
+===============================================================================
+ENGINE LIFECYCLE
+===============================================================================
+
+Every Engine MUST follow these phases.
+
+Phase 1
+
+Specification
+
+↓
+
+Phase 2
+
+Architecture
+
+↓
+
+Phase 3
+
+Data Contracts
+
+↓
+
+Phase 4
+
+State Design
+
+↓
+
+Phase 5
+
+High Fidelity UI Prototype
+
+↓
+
+Phase 6
+
+Review Gate
+
+↓
+
+Phase 7
+
+Implementation
+
+↓
+
+Phase 8
+
+Testing
+
+↓
+
+Phase 9
+
+Validation
+
+↓
+
+STOP
+
+Wait for approval.
+
+Never continue automatically.
+
+===============================================================================
+ENGINE OUTPUT FORMAT
+===============================================================================
+
+# ENGINE [N]
+
+Name
+
+Summary
+
+Dependencies
+
+Complexity
+
+Risk
+
+-------------------------------------------------------------------------------
+1. OBJECTIVE
+-------------------------------------------------------------------------------
+
+Problem
+
+Goals
+
+Business Value
+
+What becomes possible after this Engine?
+
+-------------------------------------------------------------------------------
+2. SCOPE
+-------------------------------------------------------------------------------
+
+In Scope
+
+- ...
+
+Out of Scope
+
+- ...
+
+Assumptions
+
+Dependencies
+
+-------------------------------------------------------------------------------
+3. SPECIFICATION
+-------------------------------------------------------------------------------
+
+Functional Requirements
+
+Non Functional Requirements
+
+Acceptance Criteria
+
+Success Metrics
+
+Exit Criteria
+
+-------------------------------------------------------------------------------
+4. ARCHITECTURE
+-------------------------------------------------------------------------------
+
+Module Responsibilities
+
+Folder Structure
+
+Dependency Graph
+
+Component Hierarchy
+
+Rendering Strategy
+
+State Ownership
+
+Routing Impact
+
+Shared Resources
+
+Cross-module Boundaries
+
+-------------------------------------------------------------------------------
+5. DATA CONTRACTS
+-------------------------------------------------------------------------------
+
+Props
+
+Store Interfaces
+
+Public Types
+
+Internal Types
+
+Events
+
+Mock Data
+
+Validation Rules
+
+API Response Shape
+
+Persistence Rules
+
+-------------------------------------------------------------------------------
+6. STATE DESIGN
+-------------------------------------------------------------------------------
+
+Store Name
+
+State Shape
+
+Derived State
+
+Actions
+
+Selectors
+
+Persistence
+
+Lifecycle
+
+State Flow Diagram
+
+-------------------------------------------------------------------------------
+7. UI PROTOTYPE
+-------------------------------------------------------------------------------
+
+Generate BEFORE React implementation.
+
+For every page include
+
+- Desktop HTML
+- Tablet Layout
+- Mobile Layout
+- Responsive Behaviour
+- CSS Structure
+- Colour Palette
+- Typography
+- Grid System
+- Components
+- Icons
+- Animation Description
+- Loading State
+- Empty State
+- Error State
+- Hover State
+- Focus State
+- Disabled State
+- Accessibility Notes
+
+Generate production-quality HTML + CSS prototype.
+
+DO NOT generate React components yet.
+
+Stop for UI approval.
+
+-------------------------------------------------------------------------------
+8. IMPLEMENTATION PLAN
+-------------------------------------------------------------------------------
+
+Files Created
+
+Files Modified
+
+Folder Structure
+
+Import Graph
+
+Component Responsibilities
+
+Execution Flow
+
+Performance Considerations
+
+Accessibility Considerations
+
+Potential Risks
+
+-------------------------------------------------------------------------------
+9. IMPLEMENTATION
+-------------------------------------------------------------------------------
+
+Generate production-ready code.
+
+Requirements
+
+• No TODO
+• No placeholder
+• No pseudo code
+• No stubs
+• No duplicated code
+• Strict TypeScript
+• CSS Modules
+• Feature-first architecture
+• Fully typed
+• Production ready
+
+-------------------------------------------------------------------------------
+10. TEST PLAN
+-------------------------------------------------------------------------------
+
+Unit Tests
+
+Store Tests
+
+Component Tests
+
+Integration Tests
+
+Accessibility Tests
+
+Edge Cases
+
+Failure Cases
+
+Regression Risks
+
+-------------------------------------------------------------------------------
+11. VALIDATION
+-------------------------------------------------------------------------------
+
+Validate
+
+Folder Structure
+
+Architecture Rules
+
+Dependency Rules
+
+Import Rules
+
+Type Safety
+
+Accessibility
+
+Performance
+
+Responsive Behaviour
+
+Testing Coverage
+
+Documentation Updated
+
+-------------------------------------------------------------------------------
+12. EXIT CHECKLIST
+-------------------------------------------------------------------------------
+
+[ ] Specification completed
+
+[ ] Documentation updated
+
+[ ] UI approved
+
+[ ] Folder structure correct
+
+[ ] Architecture respected
+
+[ ] No architectural shortcuts
+
+[ ] No forward assumptions
+
+[ ] No hardcoded values
+
+[ ] No console.log
+
+[ ] No dead code
+
+[ ] No duplicated logic
+
+[ ] No circular dependencies
+
+[ ] Component < 200 lines
+
+[ ] Function < 60 lines
+
+[ ] No any
+
+[ ] No unsafe type assertions
+
+[ ] Async paths handle
+
+    Loading
+
+    Success
+
+    Error
+
+    Empty
+
+[ ] Tests written
+
+[ ] Tests passing
+
+[ ] npx tsc --noEmit passes
+
+[ ] Project builds successfully
+
+-------------------------------------------------------------------------------
+13. ENGINE GATE
+-------------------------------------------------------------------------------
+
+ENGINE [N] COMPLETE
+
+STOP
+
+Wait for approval.
+
+YES
+
+Proceed to ENGINE [N+1]
+
+NO
+
+Revise ONLY the current Engine.
+
+Never modify previous Engines unless explicitly requested.
+
+===============================================================================
+GLOBAL RULES
+===============================================================================
+
+Architecture
+
+• No cross-boundary imports
+• No feature coupling
+• One responsibility per module
+• Feature-first organisation
+
+Implementation
+
+• No skipped phases
+• No assumptions
+• No placeholder code
+• No TODO comments
+• No magic strings
+• No duplicated logic
+• No unnecessary abstraction
+• No premature optimisation
+
+TypeScript
+
+• Strict mode
+• No any
+• Prefer readonly
+• Strongly typed public APIs
+• Exhaustive unions where appropriate
+
+React
+
+• Functional components only
+• Hooks only
+• Components under 200 lines
+• Pure components where possible
 
 State
-  - <action> called → <store shape after>
 
-Component
-  - renders <component> with <props> → <assertion>
-  - user does <action> → <expected behavior>
+• Zustand only
+• Minimal global state
+• Keep derived values out of state
 
-Edge / Error
-  - <condition> → <expected fallback>
+CSS
 
-#### Exit Criteria
+• CSS Modules only
+• No inline styles except dynamic values
+• Responsive by default
 
-[ ] Folder structure matches architecture rules
-[ ] All in-scope features implemented — no stubs
-[ ] Every async path handles loading / error / empty
-[ ] All test cases pass
-[ ] No cross-boundary imports
-[ ] No console.log, no hardcoded values
-[ ] Component files under 200 lines
-[ ] No `any`, no type assertions (`as`) without justification
-[ ] `npx tsc --noEmit` passes with zero errors
+Accessibility
 
-### ENGINE GATE
+• Keyboard navigation
+• Semantic HTML
+• Proper ARIA where needed
+• Colour contrast compliance
+• Focus visibility
 
-ENGINE [N] complete.
+Performance
 
-Approve?
-  YES → proceed to ENGINE [N+1]
-  NO  → list what needs to change
+• Lazy load where appropriate
+• Avoid unnecessary re-renders
+• Memoise only when justified
+• Keep bundle size minimal
 
-## Global Constraints
+Testing
 
-- No architectural shortcuts
-- No skipped test cases
-- No forward assumptions (engine N cannot know engine N+1's shape)
-- No new libraries without explicit approval
-- Every engine leaves the codebase in a working, committable state
+Every Engine must include
 
-## Create each page design before the development need to confirm the design
+• Unit Tests
+• Store Tests
+• Component Tests
+• Integration Tests where applicable
 
-- Generate high-fidelity HTML mockups for every page
+Documentation
+
+Every Engine updates
+
+spec/
+
+No documentation may become outdated.
+
+===============================================================================
+FINAL RULE
+===============================================================================
+
+Always think in this order:
+
+1. Product Owner
+2. UX Designer
+3. Software Architect
+4. Frontend Engineer
+5. QA Engineer
+6. Technical Writer
+
+Never write implementation until the specification, architecture, and UI prototype have been completed and approved.
+
+Every Engine must be independently understandable, runnable, testable, reviewable, and releasable.
 
 ```
