@@ -3,14 +3,6 @@
 
 ## Structure
 
-spec/
-
-├── README.md
-├── architecture.md
-├── codebase-guide.md
-├── prototypes/
-└── engines/
-
 src/
 
   assets/
