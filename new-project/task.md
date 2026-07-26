@@ -1668,8 +1668,3 @@ Only then is the project considered finished.
 ```
 
 </details>
-
-
-```
-
-</details>
