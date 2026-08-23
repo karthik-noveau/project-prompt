@@ -24,7 +24,7 @@ spec/
 ```
 
 ---
-<details open>
+<details>
 <summary><strong>🏗️ Architecture (architecture.md)</strong></summary>
 
 ```md
