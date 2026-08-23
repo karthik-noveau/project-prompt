@@ -93,34 +93,33 @@ Named exports only. No require(). No default exports.
 
 # Source Structure
 
-index.js                   // imports the server, nothing else
+index.js                 // imports the server, nothing else
 src/
+  server.js              // env · middlewares · route mounting · error middleware · listen
   aws/
-    config.js              // the only place AWS is initialised — env, region, credentials, dynamoose.aws.sdk
-    constant.js            // the only place table and bucket names are defined
-    bucket.js              // S3 helpers
-  common/                  // shared helpers only, never resource-specific
-    utils.js               // generateId · hasData · formatUTC
-    service.base.js        // outbound request helper
-  app/
-    server.js              // env · middlewares · route mounting · error middleware · listen
-    routes/                // paths and middleware wiring only, one named router per resource
-      user.routes.js
-      product.routes.js
-    controllers/           // HTTP boundary — read, validate, call, respond, delegate errors to errorContext
-      user.controller.js
-      product.controller.js
-      common/
-        index.js           // runPaginatedQuery · errorContext · SORT, never duplicated in a controller
-    models/                // one Dynamoose schema per resource, the only place keys and indexes live
-      userModel.js
-      productModel.js
-    services/              // logic spanning models or steps, never touches req or res
-      orderService.js
-    migration/             // one-time table and bucket scripts, disabled by default
-      routes.js
-      table.js
-      bucket.js
+    config.js            // the only place AWS is initialised — env, region, credentials, dynamoose.aws.sdk
+    constant.js          // the only place table and bucket names are defined
+    bucket.js            // S3 helpers
+  common/                // shared helpers only, never resource-specific
+    utils.js             // generateId · hasData · formatUTC
+    service.base.js      // outbound request helper
+  routes/                // paths and middleware wiring only, one named router per resource
+    user.routes.js
+    product.routes.js
+  controllers/           // HTTP boundary — read, validate, call, respond, delegate errors to errorContext
+    user.controller.js
+    product.controller.js
+    common/
+      index.js           // runPaginatedQuery · errorContext · SORT, never duplicated in a controller
+  models/                // one Dynamoose schema per resource, the only place keys and indexes live
+    userModel.js
+    productModel.js
+  services/              // logic spanning models or steps, never touches req or res
+    orderService.js
+  migration/             // one-time table and bucket scripts, disabled by default
+    routes.js
+    table.js
+    bucket.js
 
 server.js and routes never hold business logic or database calls.
 Controllers stay thin — multi-step or cross-resource logic belongs in services/.
