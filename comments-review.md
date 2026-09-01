@@ -1,1 +1,1 @@
-Review the pr comments and list in table ( ❌ not fixed comments ). columns ( Severity, file location, resolved/replied ( ✅ / ❌ | ✅ / ❌  ), what is the fix ) grouped by reviewer and no need to list if comments are fixed, resolved and replied.
+Review the pr comments and list in table category ( ❌ not fixed comments, ✅ fixed comments ). columns ( Severity, file location, resolved/replied ( ✅ / ❌ | ✅ / ❌  ), what is the fix ) grouped by reviewer and no need to list if comments are fixed, resolved and replied.
