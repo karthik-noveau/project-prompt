@@ -1,1 +1,1 @@
-review the pr comments and list as 2 tables category( ❌ unresolved comments and ✅ resolved comments ) columns ( Severity, file with comments, replied( ✅ / ❌ ), what is the fix) group by reviewer
+Review the pr comments and list in 2 tables category ( ❌ not fixed comments and  ✅ fixed comments). columns ( Severity, file location, resolved/resolved ( ✅ / ❌ | ✅ / ❌  ), what is the fix ) grouped by reviewer
