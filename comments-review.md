@@ -1,1 +1,12 @@
-Review the pr comments and list in table category ( ❌ not fixed comments, ✅ fixed comments ). columns ( SNO(continue to all comments), Severity, file location, resolved/replied ( ✅ / ❌ | ✅ / ❌  ), what is the fix ) grouped by reviewer and no need to list if comments are fixed, resolved and replied. all comments count and not fixed comments count )
+# PR Review Summary — Total Comments: [Count] | Not Fixed: [Count]
+
+Review all PR comments and group them by reviewer.
+
+Create two tables for each reviewer:
+
+* ❌ Not Fixed
+* ✅ Fixed
+
+Columns: S.No. | Severity (🔴 High / 🟠 Medium / 🟡 Low) | File Location | Replied (✅/❌) | Resolved (✅/❌) | Fix Details
+
+Keep the S.No. continuous across all comments. Exclude comments that are fixed, replied to, and resolved.
