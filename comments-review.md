@@ -1,12 +1,17 @@
-# PR Review Summary — Total Comments: [Count] | Not Fixed: [Count]
+Review all PR comments and group them by status, then reviewer.
 
-Review all PR comments and group them by reviewer.
+## ❌ Not Fixed Comments ([Count])
 
-Create two tables for each reviewer:
+### Reviewer Name
 
-* ❌ Not Fixed
-* ✅ Fixed
+[Table]
 
-Columns: S.No. | Severity (🔴 High / 🟠 Medium / 🟡 Low) | File Location | Replied (✅/❌) | Resolved (✅/❌) | Fix Details
+## ✅ Fixed Comments ([Count])
 
-Keep the S.No. continuous across all comments. Exclude comments that are fixed, replied to, and resolved.
+### Reviewer Name
+
+[Table]
+
+Columns: S.No. | Severity (🔴 High / 🟠 Medium / 🟡 Low) | File Location (File Path and Line Number: Comment Detail) | Replied (✅/❌) | Resolved (✅/❌) | Fix Details
+
+Keep S.No. continuous across all comments. Exclude comments that are fixed, replied to, and resolved. Show only reviewers with comments. Keep tables responsive, wrap content vertically, and do not omit any required details.
